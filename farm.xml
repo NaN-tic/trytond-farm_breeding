@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="animal_group_view_form">
+            <field name="model">farm.animal.group</field>
+            <field name="inherit" ref="farm.farm_animal_group_form_view"/>
+            <field name="name">animal_group_form</field>
+        </record>
+    </data>
+</tryton>

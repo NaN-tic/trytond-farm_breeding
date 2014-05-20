@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<data>
+    <xpath expr="/form/notebook/page[@id='general']/group[@id='dates']/field[@name='initial_quantity']" position="after">
+        <label name="is_breeding"/>
+        <field name="is_breeding"/>
+        <label name="breeding_account"/>
+        <field name="breeding_account"/>
+    </xpath>
+</data>

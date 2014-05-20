@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- The COPYRIGHT file at the top level of this repository contains the full
+     copyright notices and license terms. -->
+<tryton>
+    <data>
+        <record model="ir.ui.view" id="account_view_form">
+            <field name="model">analytic_account.account</field>
+            <field name="inherit" ref="analytic_account.account_view_form"/>
+            <field name="name">analytic_account_form</field>
+        </record>
+
+        <record model="ir.ui.view" id="account_view_tree">
+            <field name="model">analytic_account.account</field>
+            <field name="inherit" ref="analytic_account.account_view_tree"/>
+            <field name="name">analytic_account_tree</field>
+        </record>
+
+        <record model="ir.ui.view" id="account_view_list">
+            <field name="model">analytic_account.account</field>
+            <field name="inherit" ref="analytic_account.account_view_list"/>
+            <field name="name">analytic_account_list</field>
+        </record>
+    </data>
+</tryton>
