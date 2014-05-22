@@ -3,10 +3,43 @@
      copyright notices and license terms. -->
 <tryton>
     <data>
+        <!-- groups -->
+        <record model="res.group" id="group_farm_breedings">
+            <field name="name">Farm / Breedings</field>
+            <!--
+            members of this group shoud be added also in group "Farm / Groups"
+            -->
+        </record>
+
+        <!-- farm.animal.group -->
         <record model="ir.ui.view" id="animal_group_view_form">
             <field name="model">farm.animal.group</field>
             <field name="inherit" ref="farm.farm_animal_group_form_view"/>
             <field name="name">animal_group_form</field>
+        </record>
+
+        <!--
+        farm.create_breeding
+        -->
+        <record model="ir.ui.view" id="farm_create_breeding_start_view">
+            <field name="model">farm.create_breeding.start</field>
+            <field name="type">form</field>
+            <field name="name">farm_create_breeding_start</field>
+        </record>
+
+        <record model="ir.action.wizard" id="wizard_farm_create_breeding">
+            <field name="name">Create Breeding</field>
+            <field name="wiz_name">farm.create_breeding</field>
+        </record>
+        <record model="ir.action-res.group"
+                 id="farm_create_breeding_group_admin">
+            <field name="action" ref="wizard_farm_create_breeding"/>
+            <field name="group" ref="farm.group_farm_admin"/>
+        </record>
+        <record model="ir.action-res.group"
+                 id="farm_create_breeding_group_breeding">
+            <field name="action" ref="wizard_farm_create_breeding"/>
+            <field name="group" ref="group_farm_breedings"/>
         </record>
     </data>
 </tryton>

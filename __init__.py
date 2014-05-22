@@ -12,4 +12,9 @@ def register():
         Group,
         MoveEvent,
         TransformationEvent,
+        CreateBreedingStart,
+        Specie,
         module='farm_breeding', type_='model')
+    Pool.register(
+        CreateBreeding,
+        module='farm', type_='wizard')
