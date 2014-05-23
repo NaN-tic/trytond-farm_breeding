@@ -36,8 +36,8 @@ class Group:
             assert vals.get('initial_location')
             location = Location(vals['initial_location'])
 
-            if location.code:
-                number = location.code + '/' + number
+            number = ((location.code if location.code else location.name) +
+                '/' + number)
         return number
 
 
@@ -218,30 +218,26 @@ class CreateBreedingStart(ModelView):
 class Specie:
     __name__ = 'farm.specie'
 
-    @classmethod
-    def _create_additional_menus(cls, specie, specie_menu, specie_submenu_seq,
-            current_menus, current_actions):
+    def _create_additional_menus(self, specie_menu, specie_submenu_seq,
+            current_menus, current_actions, current_wizards):
         pool = Pool()
-        ActWindow = pool.get('ir.action.act_window')
+        Wizard = pool.get('ir.action.wizard')
         Group = pool.get('res.group')
         ModelData = pool.get('ir.model.data')
 
-        super(Specie, cls)._create_additional_menus(specie, specie_menu,
-                specie_submenu_seq, current_menus, current_actions)
+        specie_submenu_seq = super(Specie,
+            self)._create_additional_menus(specie_menu, specie_submenu_seq,
+                current_menus, current_actions, current_wizards)
 
-        if not specie.group_enabled:
+        if not self.group_enabled:
             return
 
-        act_window_create_breeding = ActWindow(
-            ModelData.get_id('farm_breeding', 'act_prescription'))
+        create_breeding_wizard = Wizard(ModelData.get_id('farm_breeding',
+                'wizard_farm_create_breeding'))
         breedings_group = Group(ModelData.get_id('farm_breeding',
                 'group_farm_breedings'))
 
-        cls._create_menu_w_action(specie, [
-                ('specie', '=', specie.id),
-                ], {
-                    'specie': specie.id,
-                }, 'Create Breedings', specie_menu, specie_submenu_seq,
-            'tryton-executable', breedings_group, act_window_create_breeding,
-            False, current_menus, current_actions)
-        specie_submenu_seq += 1
+        self._create_wizard_menu(create_breeding_wizard.name, specie_menu,
+            specie_submenu_seq, 'tryton-executable', breedings_group,
+            create_breeding_wizard, False, current_menus, current_wizards)
+        return specie_submenu_seq + 1
