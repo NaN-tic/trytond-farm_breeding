@@ -35,22 +35,9 @@ class Group:
         if number and vals.get('is_breeding'):
             assert vals.get('initial_location')
             location = Location(vals['initial_location'])
-            assert location.warehouse is not None
 
-            prefix = []
-            warehouse = location.warehouse
-            while location.parent and location != warehouse:
-                prefix.insert(0,
-                    location.code if location.code else location.name)
-                location = location.parent
-            prefix.insert(0,
-                warehouse.code if warehouse.code else warehouse.name)
-            prefix = "/".join(prefix)
-
-            if warehouse.code and warehouse.code in number:
-                number = number.replace(warehouse.code, prefix)
-            else:
-                number = prefix + '/' + number
+            if location.code:
+                number = location.code + '/' + number
         return number
 
 
