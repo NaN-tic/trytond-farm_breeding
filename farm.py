@@ -218,26 +218,15 @@ class CreateBreedingStart(ModelView):
 class Specie:
     __name__ = 'farm.specie'
 
-    def _create_additional_menus(self, specie_menu, specie_submenu_seq,
-            current_menus, current_actions, current_wizards):
+    @classmethod
+    def _get_menus_by_animal_type(cls):
         pool = Pool()
-        Wizard = pool.get('ir.action.wizard')
-        Group = pool.get('res.group')
+        Menu = pool.get('ir.ui.menu')
         ModelData = pool.get('ir.model.data')
 
-        specie_submenu_seq = super(Specie,
-            self)._create_additional_menus(specie_menu, specie_submenu_seq,
-                current_menus, current_actions, current_wizards)
+        menus_by_animal_type = super(Specie, cls)._get_menus_by_animal_type()
 
-        if not self.group_enabled:
-            return
-
-        create_breeding_wizard = Wizard(ModelData.get_id('farm_breeding',
-                'wizard_farm_create_breeding'))
-        breedings_group = Group(ModelData.get_id('farm_breeding',
-                'group_farm_breedings'))
-
-        self._create_wizard_menu(create_breeding_wizard.name, specie_menu,
-            specie_submenu_seq, 'tryton-executable', breedings_group,
-            create_breeding_wizard, False, current_menus, current_wizards)
-        return specie_submenu_seq + 1
+        menus_by_animal_type['group']['extra'].append(
+            Menu(ModelData.get_id('farm_breeding',
+                    'menu_farm_create_breeding')))
+        return menus_by_animal_type

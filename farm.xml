@@ -41,5 +41,9 @@
             <field name="action" ref="wizard_farm_create_breeding"/>
             <field name="group" ref="group_farm_breedings"/>
         </record>
+
+        <menuitem id="menu_farm_create_breeding"
+            action="wizard_farm_create_breeding"
+            parent="farm.menu_farm_animal_groups" sequence="1"/>
     </data>
 </tryton>

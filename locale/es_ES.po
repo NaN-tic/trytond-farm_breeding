@@ -1,0 +1,75 @@
+# 
+msgid ""
+msgstr "Content-Type: text/plain; charset=utf-8\n"
+
+msgctxt "field:analytic_account.account,animal_groups:"
+msgid "Animal Groups"
+msgstr "Grupos de animales"
+
+msgctxt "field:analytic_account.account,animals_account:"
+msgid "Animals Account"
+msgstr "Cuenta animales"
+
+msgctxt "field:analytic_account.account,feed_account:"
+msgid "Feed Account"
+msgstr "Cuenta pienso"
+
+msgctxt "field:analytic_account.account,is_breeding:"
+msgid "Is Breeding Account?"
+msgstr "¿Es una cuenta de crianza?"
+
+msgctxt "field:analytic_account.account,medications_account:"
+msgid "Medications Account"
+msgstr "Cuenta medicamentos"
+
+msgctxt "field:farm.animal.group,breeding_account:"
+msgid "Breeding Account"
+msgstr "Cuenta crianza"
+
+msgctxt "field:farm.animal.group,is_breeding:"
+msgid "Is Breeding?"
+msgstr "¿Es una crianza?"
+
+msgctxt "field:farm.create_breeding.start,breed:"
+msgid "Breed"
+msgstr "Raza"
+
+msgctxt "field:farm.create_breeding.start,breeding_account_parent:"
+msgid "Breeding Account Parent"
+msgstr "Padre cuenta crianza"
+
+msgctxt "field:farm.create_breeding.start,id:"
+msgid "ID"
+msgstr "Identificador"
+
+msgctxt "field:farm.create_breeding.start,location:"
+msgid "Location"
+msgstr "Ubicación"
+
+msgctxt "field:farm.create_breeding.start,specie:"
+msgid "Specie"
+msgstr "Especie"
+
+msgctxt "model:farm.create_breeding.start,name:"
+msgid "Create Breeding Start"
+msgstr "Inicio crear crianza"
+
+msgctxt "model:ir.action,name:wizard_farm_create_breeding"
+msgid "Create Breeding"
+msgstr "Crear crianza"
+
+msgctxt "model:ir.ui.menu,name:menu_farm_create_breeding"
+msgid "Create Breeding"
+msgstr "Crear crianza"
+
+msgctxt "model:res.group,name:group_farm_breedings"
+msgid "Farm / Breedings"
+msgstr "Granja / Crianzas"
+
+msgctxt "view:analytic_account.account:"
+msgid "Breeding"
+msgstr "Crianza"
+
+msgctxt "view:farm.create_breeding.start:"
+msgid "Create Breeding"
+msgstr "Crear crianza"
