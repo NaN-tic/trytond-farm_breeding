@@ -86,7 +86,7 @@ class CreateBreeding(Wizard):
     __name__ = 'farm.create_breeding'
 
     start = StateView('farm.create_breeding.start',
-        'farm_breeding.create_breeding_start_view', [
+        'farm_breeding.farm_create_breeding_start_view', [
             Button('Cancel', 'end', 'tryton-cancel'),
             Button('Create', 'create_', 'tryton-ok', default=True),
             ])
