@@ -162,10 +162,10 @@ class CreateBreeding(Wizard):
             breeding_group = AnimalGroup()
             breeding_group.is_breeding = True
             breeding_group.breeding_account = breeding_account
-            breeding_group.specie = self.start.specie,
-            breeding_group.breed = self.start.breed,
+            breeding_group.specie = self.start.specie
+            breeding_group.breed = self.start.breed
             breeding_group.origin = 'raised'
-            breeding_group.initial_location = self.start.location,
+            breeding_group.initial_location = self.start.location
             breeding_group.initial_quantity = 0
             breeding_group.save()
 
