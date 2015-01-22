@@ -170,7 +170,7 @@ class CreateBreeding(Wizard):
             breeding_group.save()
 
         breeding_account.name = breeding_group.number
-        breeding_account.animal_groups.append(breeding_group.id)
+        breeding_account.animal_groups += (breeding_group.id,)
         breeding_account.save()
 
         setattr(self.start.location,
