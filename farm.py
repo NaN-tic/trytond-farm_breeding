@@ -162,10 +162,10 @@ class CreateBreeding(Wizard):
             breeding_group = AnimalGroup()
             breeding_group.is_breeding = True
             breeding_group.breeding_account = breeding_account
-            breeding_group.specie = self.start.specie,
-            breeding_group.breed = self.start.breed,
+            breeding_group.specie = self.start.specie
+            breeding_group.breed = self.start.breed
             breeding_group.origin = 'raised'
-            breeding_group.initial_location = self.start.location,
+            breeding_group.initial_location = self.start.location
             breeding_group.initial_quantity = 0
             breeding_group.save()
 
@@ -173,10 +173,10 @@ class CreateBreeding(Wizard):
         breeding_account.animal_groups += (breeding_group.id,)
         breeding_account.save()
 
-        setattr(self.start.location,
-            'analytic_account_%s' % breeding_account.root.id,
-            breeding_account)
-        self.start.location.save()
+        analytic_acc_field = 'analytic_account_%s' % breeding_account.root.id
+        Location.write([self.start.location], {
+                analytic_acc_field: breeding_account.id,
+                })
 
         action['views'].reverse()
         return action, {'res_id': [breeding_group.id]}

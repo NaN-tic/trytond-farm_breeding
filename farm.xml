@@ -21,7 +21,7 @@
         <!--
         farm.create_breeding
         -->
-        <record model="ir.ui.view" id="farm_create_breeding_start_view">
+        <record model="ir.ui.view" id="create_breeding_start_view">
             <field name="model">farm.create_breeding.start</field>
             <field name="type">form</field>
             <field name="name">farm_create_breeding_start</field>
