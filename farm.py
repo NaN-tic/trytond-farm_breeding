@@ -53,7 +53,7 @@ class MoveEvent:
             if not event.to_location.analytic_accounts:
                 continue
             for account in event.to_location.analytic_accounts.accounts:
-                if event.to_animal_group.breeding_account == account:
+                if event.animal_group.breeding_account == account:
                     break
                 if account.is_breeding:
                     event.animal_group.breeding_account = account

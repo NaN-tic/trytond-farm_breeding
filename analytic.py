@@ -112,6 +112,7 @@ class StockMove:
         if type != 'expense' or not self.origin:
             return accounts
 
+        accounts = list(accounts)
         for account in accounts[:]:
             if account.is_breeding:
                 if isinstance(self.origin, (MoveEvent, TransformationEvent)):
