@@ -8,8 +8,7 @@
         <field name="is_breeding"/>
     </xpath>
     <xpath expr="/form/notebook/page[@id='general']" position="after">
-        <page id="breeding_accounts" string="Breeding"
-                states="{'invisible': Not(Eval('is_breeding', False))}">
+        <page id="breeding_accounts" string="Breeding">
             <label name="animals_account"/>
             <field name="animals_account"/>
             <label name="feed_account"/>

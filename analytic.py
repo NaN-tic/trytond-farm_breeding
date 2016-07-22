@@ -92,6 +92,16 @@ class Account:
             breeding_accounts[fname] = new_account
         return breeding_accounts
 
+    @classmethod
+    def view_attributes(cls):
+        res = super(Account, cls).view_attributes()
+        res += [
+            ('/form/notebook/page[@id="breeding_accounts"]', 'states', {
+                    'invisible': Not(Eval('is_breeding', False)),
+                    }),
+            ]
+        return res
+
 
 class StockMove:
     __name__ = 'stock.move'
