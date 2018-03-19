@@ -195,6 +195,7 @@ class CreateBreedingStart(ModelView):
     location = fields.Many2One('stock.location', "Location", domain=[
             ('type', '=', 'storage'),
             ('silo', '=', False),
+            ('parent', 'child_of', Eval('context', {}).get('farms', None)),
             ], required=True,
         context={
             'animal_type': 'group',
