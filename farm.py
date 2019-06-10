@@ -1,19 +1,19 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 from decimal import Decimal
-
 from trytond.model import ModelView, fields
 from trytond.pool import Pool, PoolMeta
 from trytond.pyson import Eval
 from trytond.transaction import Transaction
 from trytond.wizard import Wizard, StateView, StateAction, Button
+from trytond.exceptions import UserError
+from trytond.i18n import gettext
 
 __all__ = ['Group', 'MoveEvent', 'TransformationEvent',
     'CreateBreeding', 'CreateBreedingStart', 'Specie']
-__metaclass__ = PoolMeta
 
 
-class Group:
+class Group(metaclass=PoolMeta):
     __name__ = 'farm.animal.group'
 
     is_breeding = fields.Boolean('Is Breeding?', readonly=True, select=True)
@@ -41,7 +41,7 @@ class Group:
         return number
 
 
-class MoveEvent:
+class MoveEvent(metaclass=PoolMeta):
     __name__ = 'farm.move.event'
 
     @classmethod
@@ -61,7 +61,7 @@ class MoveEvent:
                     break
 
 
-class TransformationEvent:
+class TransformationEvent(metaclass=PoolMeta):
     __name__ = 'farm.transformation.event'
 
     @classmethod
@@ -92,20 +92,6 @@ class CreateBreeding(Wizard):
             ])
     create_ = StateAction('farm.act_farm_animal_group')
 
-    @classmethod
-    def __setup__(cls):
-        super(CreateBreeding, cls).__setup__()
-        cls._error_messages.update({
-                'animals_in_location': ('There are %(quantity)s animals in '
-                    'group(s) in location "%(location)s".\nPlease, empty the '
-                    'location before create a new breeding.'),
-                'location_silos_not_empty': ('The silos that fed the location '
-                    '"%(location)s" are not empty. Bellow are listed the '
-                    'silos and the feed quantities remaining in them.\n'
-                    'Please, empty them before create the breeding.\n\n'
-                    '%(not_empty_silos)s'),
-                })
-
     def do_create_(self, action):
         pool = Pool()
         AnalyticAccount = pool.get('analytic_account.account')
@@ -117,10 +103,10 @@ class CreateBreeding(Wizard):
         with Transaction().set_context(locations=[self.start.location.id]):
             group_quantity = self.start.specie.group_product.quantity
         if group_quantity > 0:
-            self.raise_user_error('animals_in_location', {
-                    'location': self.start.location.rec_name,
-                    'quantity': group_quantity,
-                    })
+            raise UserError(gettext('farm_breeding.msg_animals_in_location',
+                    location=self.start.location.rec_name,
+                    quantity=group_quantity,
+                    ))
 
         silo_locations = Location.search([
                 ('silo', '=', True),
@@ -129,7 +115,7 @@ class CreateBreeding(Wizard):
         pbl = Product.products_by_location([l.id for l in silo_locations],
             with_childs=False, grouping=('product', 'lot'))
         not_empty_silos = []
-        for (location_id, product_id, lot_id), quantity in pbl.iteritems():
+        for (location_id, product_id, lot_id), quantity in pbl.items():
             if (Decimal(str(quantity)).quantize(Decimal('0.01'))
                     > Decimal('0.01')):
                 if lot_id is not None:
@@ -142,10 +128,11 @@ class CreateBreeding(Wizard):
                             Location(location_id).rec_name,
                             Product(product_id).rec_name))
         if not_empty_silos:
-            self.raise_user_error('location_silos_not_empty', {
-                    'location': self.start.location.rec_name,
-                    'not_empty_silos': "\n".join(not_empty_silos),
-                    })
+            raise UserError(gettext(
+                    'farm_breeding.msg_location_silos_not_empty',
+                    location=self.start.location.rec_name,
+                    not_empty_silos="\n".join(not_empty_silos),
+                    ))
 
         breeding_account = AnalyticAccount()
         breeding_account.name = 'Temp'
@@ -215,7 +202,7 @@ class CreateBreedingStart(ModelView):
         return context.get('specie')
 
 
-class Specie:
+class Specie(metaclass=PoolMeta):
     __name__ = 'farm.specie'
 
     @classmethod

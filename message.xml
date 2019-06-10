@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<tryton>
+    <data group="1">
+        <record model="ir.message" id="msg_animal_in_location">
+            <field name="text">There are %(quantity)s animals in group(s) in location "%(location)s".\nPlease, empty the location before create a new breeding.</field>
+        </record>
+        <record model="ir.message" id="msg_location_silos_not_empty">
+            <field name="text">The silos that fed the location "%(location)s" are not empty. Bellow are listed the silos and the feed quantities remaining in them.\nPlease, empty them before create the breeding.\n\n%(not_empty_silos)s</field>
+        </record>
+    </data>
+</tryton>

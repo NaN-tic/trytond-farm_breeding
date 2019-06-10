@@ -5,7 +5,6 @@ from trytond.pool import Pool, PoolMeta
 from trytond.pyson import And, Eval, Greater, Not
 
 __all__ = ['Account', 'StockMove']
-__metaclass__ = PoolMeta
 
 _DOMAIN_BREEDING_ACCOUNTS = [
     ('type', '=', 'normal'),
@@ -22,7 +21,7 @@ _STATES_BREEDING_ACCOUNTS = {
 _DEPENDS_BREEDING_ACCOUNTS = ['id', 'is_breeding', 'active']
 
 
-class Account:
+class Account(metaclass=PoolMeta):
     __name__ = 'analytic_account.account'
 
     is_breeding = fields.Boolean('Is Breeding Account?', select=True)
@@ -68,8 +67,8 @@ class Account:
             account = new_accounts[i]
             account.is_breeding = True
 
-            for fname, child_acc in account._get_breeding_childs_accounts()\
-                    .items():
+            accounts = account._get_breeding_childs_accounts()
+            for fname, child_acc in accounts.items():
                 setattr(account, fname, child_acc)
             account.save()
         return new_accounts
@@ -103,7 +102,7 @@ class Account:
         return res
 
 
-class StockMove:
+class StockMove(metaclass=PoolMeta):
     __name__ = 'stock.move'
 
     def _get_analytic_accounts(self, type):

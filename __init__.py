@@ -1,20 +1,19 @@
 # The COPYRIGHT file at the top level of this repository contains the full
 # copyright notices and license terms.
 from trytond.pool import Pool
-from .analytic import *
-from .farm import *
-
+from . import analytic
+from . import farm
 
 def register():
     Pool.register(
-        Account,
-        StockMove,
-        Group,
-        MoveEvent,
-        TransformationEvent,
-        CreateBreedingStart,
-        Specie,
+        analytic.Account,
+        analytic.StockMove,
+        farm.Group,
+        farm.MoveEvent,
+        farm.TransformationEvent,
+        farm.CreateBreedingStart,
+        farm.Specie,
         module='farm_breeding', type_='model')
     Pool.register(
-        CreateBreeding,
+        farm.CreateBreeding,
         module='farm', type_='wizard')
