@@ -16,4 +16,4 @@ def register():
         module='farm_breeding', type_='model')
     Pool.register(
         farm.CreateBreeding,
-        module='farm', type_='wizard')
+        module='farm_breeding', type_='wizard')
