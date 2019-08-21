@@ -99,6 +99,9 @@ class CreateBreeding(Wizard):
         Location = pool.get('stock.location')
         Lot = pool.get('stock.lot')
         Product = pool.get('product.product')
+        LocationCompany = pool.get('stock.location.company')
+        Entry = pool.get('analytic.account.entry')
+        User = pool.get('res.user')
 
         with Transaction().set_context(locations=[self.start.location.id]):
             group_quantity = self.start.specie.group_product.quantity
@@ -160,10 +163,25 @@ class CreateBreeding(Wizard):
         breeding_account.animal_groups += (breeding_group.id,)
         breeding_account.save()
 
-        analytic_acc_field = 'analytic_account_%s' % breeding_account.root.id
-        Location.write([self.start.location], {
-                analytic_acc_field: breeding_account.id,
-                })
+        user = User(Transaction().user)
+        for location_company in self.start.location.companies:
+            if location_company.company == user.company:
+                break
+        else:
+            location_company = LocationCompany()
+            location_company.location = self.start.location
+            location_company.company = user.company
+            location_company.save()
+
+        for entry in location_company.analytic_accounts:
+            if entry.root == breeding_account.root:
+                break
+        else:
+            entry = Entry()
+            entry.origin = location_company
+            entry.root = breeding_account.root
+        entry.account = breeding_account
+        entry.save()
 
         action['views'].reverse()
         return action, {'res_id': [breeding_group.id]}
