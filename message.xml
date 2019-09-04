@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <tryton>
-    <data group="1">
+    <data grouped="1">
         <record model="ir.message" id="msg_animal_in_location">
             <field name="text">There are %(quantity)s animals in group(s) in location "%(location)s".\nPlease, empty the location before create a new breeding.</field>
         </record>
