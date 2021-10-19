@@ -9,7 +9,7 @@ __all__ = ['Account', 'StockMove']
 _DOMAIN_BREEDING_ACCOUNTS = [
     ('type', '=', 'normal'),
     ['OR',
-        ('parent', 'child_of', [Eval('id')]),
+        ('parent', 'child_of', [Eval('id', -1)]),
         ('parent', '=', None),
         ],
     ]
