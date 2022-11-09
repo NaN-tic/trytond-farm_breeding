@@ -16,11 +16,11 @@ __all__ = ['Group', 'MoveEvent', 'TransformationEvent',
 class Group(metaclass=PoolMeta):
     __name__ = 'farm.animal.group'
 
-    is_breeding = fields.Boolean('Is Breeding?', readonly=True, select=True)
+    is_breeding = fields.Boolean('Is Breeding?', readonly=True)
     breeding_account = fields.Many2One('analytic_account.account',
         'Breeding Account', readonly=True, domain=[
             ('is_breeding', '=', True),
-            ], select=True, ondelete='CASCADE',
+            ], ondelete='CASCADE',
         states={
             'required': Eval('is_breeding', False),
             'invisible': ~Eval('is_breeding', False),

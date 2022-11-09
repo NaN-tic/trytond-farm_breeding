@@ -24,7 +24,7 @@ _DEPENDS_BREEDING_ACCOUNTS = ['id', 'is_breeding', 'active']
 class Account(metaclass=PoolMeta):
     __name__ = 'analytic_account.account'
 
-    is_breeding = fields.Boolean('Is Breeding Account?', select=True)
+    is_breeding = fields.Boolean('Is Breeding Account?')
     animals_account = fields.Many2One('analytic_account.account',
         'Animals Account', domain=_DOMAIN_BREEDING_ACCOUNTS,
         states=_STATES_BREEDING_ACCOUNTS, depends=_DEPENDS_BREEDING_ACCOUNTS)
