@@ -57,6 +57,7 @@ class Account(metaclass=PoolMeta):
 
     @classmethod
     def create(cls, vlist):
+        vlist = [x.copy() for x in vlist]
         breeding_indexes = []
         for i, vals in enumerate(vlist):
             if vals.get('is_breeding'):
