@@ -24,7 +24,7 @@ class Group(metaclass=PoolMeta):
         states={
             'required': Eval('is_breeding', False),
             'invisible': ~Eval('is_breeding', False),
-            }, depends=['is_breeding'])
+            })
 
     @classmethod
     def _calc_number(cls, specie_id, farm_id, vals):
@@ -196,7 +196,7 @@ class CreateBreedingStart(ModelView):
             ], required=True, readonly=True)
     breed = fields.Many2One('farm.specie.breed', 'Breed', domain=[
             ('specie', '=', Eval('specie')),
-            ], required=True, depends=['specie'])
+            ], required=True)
     location = fields.Many2One('stock.location', "Location", domain=[
             ('type', '=', 'storage'),
             ('silo', '=', False),

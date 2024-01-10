@@ -40,7 +40,7 @@ class Account(metaclass=PoolMeta):
             ], readonly=True,
         states={
             'invisible': Not(Eval('is_breeding', False)),
-            }, depends=['is_breeding'])
+            })
 
     @classmethod
     def __setup__(cls):
