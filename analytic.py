@@ -27,13 +27,13 @@ class Account(metaclass=PoolMeta):
     is_breeding = fields.Boolean('Is Breeding Account?')
     animals_account = fields.Many2One('analytic_account.account',
         'Animals Account', domain=_DOMAIN_BREEDING_ACCOUNTS,
-        states=_STATES_BREEDING_ACCOUNTS, depends=_DEPENDS_BREEDING_ACCOUNTS)
+        states=_STATES_BREEDING_ACCOUNTS)
     feed_account = fields.Many2One('analytic_account.account',
         'Feed Account', domain=_DOMAIN_BREEDING_ACCOUNTS,
-        states=_STATES_BREEDING_ACCOUNTS, depends=_DEPENDS_BREEDING_ACCOUNTS)
+        states=_STATES_BREEDING_ACCOUNTS)
     medications_account = fields.Many2One('analytic_account.account',
         'Medications Account', domain=_DOMAIN_BREEDING_ACCOUNTS,
-        states=_STATES_BREEDING_ACCOUNTS, depends=_DEPENDS_BREEDING_ACCOUNTS)
+        states=_STATES_BREEDING_ACCOUNTS)
     animal_groups = fields.One2Many('farm.animal.group', 'breeding_account',
         'Animal Groups', domain=[
             ('is_breeding', '=', True),
