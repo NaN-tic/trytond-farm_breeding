@@ -15,7 +15,6 @@ _DOMAIN_BREEDING_ACCOUNTS = [
     ]
 _STATES_BREEDING_ACCOUNTS = {
     'invisible': Not(Eval('is_breeding', False)),
-    'readonly': Not(Eval('active', False)),
     'required': And(Eval('is_breeding', False), Greater(Eval('id', 0), 0)),
     }
 _DEPENDS_BREEDING_ACCOUNTS = ['id', 'is_breeding', 'active']
